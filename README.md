@@ -1,5 +1,6 @@
-# Base de datos para computo en la nube
+# Base de Datos para Computo en la Nube
 
-Este repositorio contiene informacion relevante sobre base de datos NOSQL, especificamente en mongoDB y Base de Datos Avanzadas, enfocado en Proceso ETL (con Microsoft SSIS), Data warehouse y Visualizaciones en Dashboards enfocado en Power Bi.
+Este repositorio contiene información relevante de base de datos 
+NOSQL, especificamente en mongoDB y Base de Datos Avanzadas, enfocado en Proceso ETL (con Microsoft SSIS), Data Warehouse y Visualizaciones en Dashboards enfocado en Power BI.
 
-![MongoDB](./img/mongoDbimg.png)
+![MongoDB](./img/mongodb.png)

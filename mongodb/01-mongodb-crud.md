@@ -1,331 +1,272 @@
+
 # Crud y consultas en MongoDB
-## Crear base de datos
-Solo se crea si contiene por lo menos una coleccion
 
+## Crear una Base de Datos
+Solo se crea si contiene por lo menos una 
+colección
 
-#Como crear una coleccion 
+**use bd1** 
 
-** use bd1 **
+## Como crear una coleccion
+use bd1
+db.createCollection("Empleado")
+        
+## Mostrar las colecciones 
+show collections
 
+## Insertar un Documento
+```json
+db.alumnos.insertOne(
+{
+   nombre: 'Soyla',
+   apellido1: 'Vaca',
+   edad: 32,
+   ciudad: 'San Miguel de las Piedras'
+}
+)
+```
 
-
+## Inserción de un documento mas complejo con array
 
 ```json
 db.alumnos.insertOne(
 {
-nombre:'Soyla',
-apellido1: 'Vaca',
-edad:32,
-ciudad: 'San Miguel de las Piedras'
+  nombre: "Joquin",
+apellido: "Dorian",
+apellido2: "Guerrero",
+edad: 15,
+aficiones: [ 'Cerveza', 'Hueva',"Canabis"]
 })
 ```
 
+## Inserción de documentos mas complejos con documentos anidados y ID
 
-
-## Comsulta toda la tabla
-
-db.alumnos.find({})
-
-
-## Insersion de un documento mas complejo con array
-
-```json
+``` json
 db.alumnos.insertOne(
- {
- nombre: "Joaquin",
- apellido: "Dorian",
- apellido2: "Guerrero",
- edad: 15,
- aficiones: [
-              'Cerveza', 'Hueva', "Cannabis"
-            ]
- })
-```
+{
+      nombre: 'Jose Luis',
+      apellido1: "Herrera",
+      apellido2: "Gallardo",
+      edad: 41,
+      estudios: [
+               'Ing en Sistemas Computacionales',
+               'Maestria en Tecnologías de Información'
+             ],
+  experiencia: {
+                 lenguaje: 'SQl',
+                 sbd: "SQL Server",
+                 aniosExp: 14
+              }
+}
+)
 
-
- 
- ## Insersion de documentos mas complejos con documentos anidados y Id
-
-
-```json
-db.alumnos.insertOne(
- {
- nombre: "Jose Luis",
- apellido: 'Ortiz',
- edad: 45,
- estudios: [
-            "Ing en Sistemas Computacionales",
-            "Maestria en Tecnologias de la Informacion"
-          ],
- experiencia: {
-               lenguaje: 'Sql',
-               sdb:"SQL Server",
-               aniosExp: 14
-             }
- })
-```
-
-```json
- db.alumnos.insertOne(
- {
-    _id: 3,
-    nombre:'Sergio',
-    apellido: 'Ramos',
-    equipo: 'Monterrey',
-    aficiones: ['Dinero', 'Hombres', 'Fiesta'],
+db.alumnos.insertOne({
+    _id: 3, 
+    nombre: 'Sergio', 
+    apellido: 'Ramos', 
+    equipo: 'Monterrey', 
+    aficiones: [ 'Dinero', 'Hombres', 'Fiesta' ], 
     talentos: {
-            futbol: true,
-            bañarse: false
+        futbol: true, 
+        bañarse: false
     }
- })
+}
+)
 ```
 
-
-## Insertar multiples documentos 
+## Insertar Multiples documentos
 
 ```json
 db.alumnos.insertMany(
- [
-   {
-     _id: 12,
-     nombre: 'Roberto',
-     apellido: 'Gomez',
-     edad: "23",
-     descripcion: "Es un comediante bueno"
- },
- {
-   nombre: "Luis",
-   apellido: "Suarez",
-   edad: 43,
-   habilidades: [
-                  'Correr', 'dormir', 'morder'
-                ],
-    direcciones: {
-                calle: 'Del infierno',
-                numero: 666
-              },
-    esposas: [
-            {
-                nombre: "Marisol",
-                edad: 20,
-                pension: 350,
-                hijos:['Joaquin', 'Bridget']
-            },
-            {
-                nombre: "Dorien",
-                edad: 46,
-                pension: 6500.56,
-                complaciente: true
-            }
-    ]
- }
- ]
- )
+   [
+     {
+         _id: 12,
+         nombre: 'Roberto',
+         apellido: 'Gomez',
+         edad: "23",
+         descripcion: "Es un comediante bueno"
+     },
+     {
+         nombre: 'Luis',
+         apellido: "Suarez",
+         edad: 43,
+         habilidades: [
+                       'Correr', 'dormir', 'Morder'
+                      ],
+        direcciones: {
+                         calle: 'Del infierno',
+                         numero: 666
+                     },
+        esposas: [
+                     {
+                   nombre: "Marisol",
+                   edad: 20,
+                   pension: 350
+                   , hijos: ['Joaquin', 'Bridget']
+                     },
+                    {
+                       nombre: "Dorien",
+                       edad: 46,
+                       pension: 6500.56,
+                       complaciente: true
+                    }
+                ]
+  }
+]
+)
 ```
 
+# Practica1
 
-# Practica 1
-
-## Cargar datos
-
-```json
+## Cargar Datos
 [Libros.json](./data/libros.json)
-```
 
-## Busquedas. Condiciones simples de igualdad. Metodo find()
+## Búsquedas. Condiciones Simples de Igualdad. Metodo find()
 
-1. Seleccionar todos los documentos de la coleccion libros
-
+1. Seleccionar todos los documentos de la colección libros
 ```json
- db.libros.find({})
+db.libros.find({})
 ```
+2. Mostrar todos los documentos que sean la editorial biblio
 
-2. Mostrar todos los documentos que sean de la editorial biblio
-
-```json
-db.libros.find({editorial: 'Biblio'})
-```
+db.libros.find({editorial:'Biblio'})
 
 3. Mostrar todos los documentos que el precio sea 25
 
-```json
-db.libros.find({precio: 25})
-```
+db.libros.find({precio:25})
 
-4. Seleccionar todos los documentos donde el titulo sea Json para todos
+4. Seleccionar todos los documentos donde el titulo sea json para todos
 
-```json
-db.libros.find({titulo: 'JSON para todos'})
-```
+db.libros.find({titulo:'JSON para todos'})
 
+## Operadores de Comparación 
 
-## Operadores de comparacion
-
-```json
 [Operadores de comparacion](https://www.mongodb.com/docs/manual/reference/operator/query/)
 
-![Operadores de comparacion](./img/operadores_relacionales.png)
-```
+![Operadores de Comparacion](./img/operadores-Relacionales.png)
 
-1. Mostrar todos los documentos donde el precio sea mayor a 25
+1. Mostrar todos los documentos donde el preco sea mayor a 25
 
-```json
-db.libros.find({precio:{$gt: 25}})
-```
+db.libros.find({ precio: { $gt: 25 } })
 
-2. Mostrar los documentos donde el precio sea 25
+2. Mostrar los documentos donde precio sea 25
 
-```json
-db.libros.find(
- {
-   precio:{$eq: 25}
- }
-)
-```
+db.libros.find({ precio: { $eq: 25 } })
 
 3. Mostrar los documentos cuya cantidad sea menor a 5
+db.libros.find({ cantidad: { $lt: 5 } })
 
-```json
-db.libros.find({precio:{$lt: 5}})
-```
+4. Mostrar los documentos que pertenezcan a la editorial 
+   biblio o planeta
 
-4. Mostrar los documentos que pertenezcan a la editorial biblio o planeta
+db.libros.find({editorial:{$in:['Biblio', 'Planeta']}})
 
-```json
-db.libros.find({editorial:{$in: ['Biblio', 'Planeta']}})
-```
+5. Mostrar todos los documentos de libros que cuesten 20 o 25
 
-5. Mostrar todos los documentos de libross que cuestes 20 o 25
-
-```json
 db.libros.find({precio:{$in:[20, 25]}})
-```
 
 6. Mostrar todos los documentos de libros que no cuesten 20 o 25
 
-```json
 db.libros.find({precio:{$nin:[20, 25]}})
-```
 
-7. Mostrar el primer documento de libros que cueste 20 o 25
+7. Mostrar el primer documento de libros que cueste 20 0 25
+db.libros.findOne( { precio: { $in: [20, 25] } } )
 
-```json
-db.libros.findOne({precio:{$in:[20, 25]}})
-```
+## Operadores Lógicos
 
-## Operadores logicos 
+[Operadores Lógicos](https://www.mongodb.com/docs/manual/reference/operator/query/)
 
-```json
-
-[Operadores logicos](https://www.mongodb.com/docs/manual/reference/operator/query/)
-
-![Operadores logicos](./img/operadores_logicos.png)
-```
+![Operadores Lógicos](./img/Operadores-Logicos.png)
 
 ### Operador AND
 
-Dos posibles opciones de AND 
+Dos posibles opciones de AND
 
-1. La simple mediante condiciones separadas por comas
+1. La simple, mediante condiciones separadas por comas
 
-Sintaxis
-<br> 
-db.coleccion.find({condicion1, condicion2}) -> Con esto asume que es una *and*
+***sintaxis***
+
+db.coleccion.find({condicion1, condicion2}) -> Con esto asume que es una ***and***
 
 2. Usando el operador $and
 
-*Sintaxis*<br>
+***sintaxis***
+db.coleccion.find({$and:[{condicion1},{condicion2}]})
+
+#### Ejercicios
+
+1. Mostrar todos aquellos libros que cuesten mas de 25 y cuya cantidad
+  sea inferior a 15
+
+ ***Forma Simple***
+
+ db.libros.find({ precio: { $gt: 25 } , cantidad: { $lt: 15 } }) 
+
+ 2. Mostrar todos aquellos libros que cuesten mas de 25 y cuya cantidad sea inferior a 15 y id igual 4
+
+ db.libros.find( { precio: { $gt: 25 } , cantidad: { $lt: 15 }, _id:4})
+
+ db.libros.find( { precio: { $gt: 25 } , cantidad: { $lt: 15 }, _id:{$eq:4}})
+
+ ***Operador $and***
+
+ 1. Mostrar todos aquellos libros que cuesten mas de 25 y cuya cantidad sea inferior a 15
+
+ db.libros.find(
+    {  
+      $and:[
+        {precio:{$gt:25}},
+        {cantidad:{$lt:15}}
+      ]
+    }
+ )
+
+ 2. Mostrar todos aquellos libros que cuesten mas de 25 y cuya cantidad sea inferior a 15 y id igual 4
+
+
+
+ ### Operador OR
+
+ #### Mostrar todos aquellos libros que cuesten mas de 25 o cuya cantidad sea inferior a 15 
 
 ```json
-db.coleccion.find(
- {
-   $and:[{condicion1},
-   {condicion2}]
- }
-)
-```
+ db.libros.find( { $or: [{ precio: { $gt: 25 } }, { cantidad: { $lt: 15 } }] })
+ ```
 
-### Ejercicios
-
-1. Mostrar todos aquellos libros que cuesten mas de 25 y cuya cantidad sea inferior a 15
-
-*Forma simple*
-
-```json
-db.libros.find(
- {  
-   precio: { $gt: 25 },  
-   cantidad: { $lt: 15 }
- } 
-)
-```
-
-2. Mostrar todos aquellos libros que cuesten mas de 25 y cuya cantidad sea inferior a 15 y id igual 4
-
-```json
-db.libros.find(
- {  
-      precio: { $gt: 25 },  
-      cantidad: { $lt: 15 }, 
-      _id: {$eq: 4} 
- } 
-)
-```
-
-*Operador $and*
-
-1. Mostrar todos aquellos libros que cuesten mas de 25 y cuya cantidad sea inferior a 15
-
-```json
-db.libros.find( 
- {
-    $and: [{precio: {$gt: 25}},
-    {cantidad: {$lt: 15}}]
- }
-)
-```
-
-2. Mostrar todos aquellos libros que cuesten mas de 25 y cuya cantidad sea inferior a 15 y id igual 4
-
-```json
-db.libros.find( 
- {
-    $and: [{precio: {$gt: 25}},
-    {cantidad: {$lt: 15}},
-    {_id: {$eq: 4}}]
- }
-)
-```
-
-### Operador OR
-
-#### Mostrartodos aquellos libros que cuesten mas de 25 o cuya cantidad sea inferiora 15
-
-```json
-db.libros.find( 
- {
-    $or: [{precio: {$gt: 25}},
-    {cantidad: {$lt: 15}}]
- }
-)
-```
-
-### AND y OR Combinadas
+ ### AND y OR Combinadas 
 
 1. Mostrar los libros de la editorial Biblio con precio mayor a 40 o libros de la editorial Planeta
-con precio mayor a 30
+   con precio mayor a 30
+     
 
-```json
 db.libros.find(
-   {
-     $or : [
-       {$and:[{editorial: 'Biblio'},{precio:{$gt: 30}}]},
-       {$and: [{editorial:{$eq:'Planeta'}},{precio:{$gt:20}}]}
-           ] 
-})
-```
+    {
+      $or: [
+           { $and:[{editorial:'Biblio'},{precio:{$gt:30}}]},
+           { $and:[{editorial:{$eq:'Planeta'}},{precio:{$gt:20}}]}
+      ]
+    }
+)
 
-## Proyeccion de Columnas
+db.libros.find(
+    {
+      $or: [
+           { $and:[{editorial:'Biblio'},{precio:{$gt:30}}]},
+           { $and:[{editorial:{$eq:'Planeta'}},{precio:{$gt:20}}]}
+      ]
+    }
+)
+
+db.libros.find(
+    {
+      $or: [
+           {editorial:'Biblio',precio:{$gt:30}},
+           { editorial:{$eq:'Planeta'},precio:{$gt:20}}
+      ]
+    }
+)
+
+## Proyección de Columnas
 
 *** Sintaxis ***
 
@@ -333,58 +274,62 @@ db.coleccion.find(filtro, columnas)
 
 db.libros.find({},{titulo:1})
 
-1. Seleccionar todos los documentos, mostrando el titulo y la editorial
+1. Seleccionar todos los documentos, mostrando el titulo y 
+   la editorial
 
 ```json
-db.libros.find({},{titulo:1, editorial:1})
+    db.libros.find({},{titulo:1, editorial:1})
+    db.libros.find({},{titulo:1, editorial:1, _id:0})
 ```
 
-2. Seleccionar todos los documentos de la editorial planeta, mostrando 
-solamente el titulo y la editorial
+2. Seleccionar todos los documentos de la editorial planeta,
+   mostrando solamente el titulo y la editorial
 
 ```json
-db.libros.find({editorial: 'Planeta'}, {_id:0,titulo:1 ,editorial:1})
+   db.libros.find({editorial:'Planeta'}, {_id:0, titulo:1, editorial:1})
 ```
 
-## Operador exists (Permite saber si un campo si un campo se encuentra o no en un documento)
-
+## Operador exists (Permite saber si un campo se encuentra o no en un documento)
 ```json
-db.libros.find( { editorial:{ $exists:true } } )
-```
+db.libros.find({ editorial:{$exists:true}})
 
+db.libros.insertOne(
+  {
+    _id:10,
+    titulo: 'Mongo en entornos gráficos',
+    editorial: 'Terra', 
+    precio:125
+  }
+)
+```
 1. Mostrar todos los documentos que no contengan el campo cantidad
 
 ```json
-db.libros.find(
- {
-   cantidad:{$exists:false}
- }
-)
+db.libros.find( { cantidad: { $exists: true }})
 ```
 
-## Operador Type (Permite preguntar si un determinado campo corresponde con un tipo) 
+## Operador Type (Permite preguntar si un determinado campo corresponde con un tipo)
 
 [Operador Type](https://www.mongodb.com/docs/manual/reference/operator/query/type/#mongodb-query-op.-type)
 
 1. Mostrar todos los documentos donde el precio sean dobles
 
-```json
 db.libros.find({precio:{$type:1}})
 db.libros.find({precio:{$type:16}})
-```
 
-```json
 db.libros.insertOne({
   _id:11,
-  titulo: 'IA',
-  editorial: 'Terra', 
+  titulo:'IA',
+  editorial: 'Terra',
   precio:125.4,
-  cantidad: 20
+  cantidad:20
 })
-```
 
-```json
-db.libros.insertMany([
+ db.libros.find({precio:{$type:1}}, {_id:0})
+
+ db.libros.find({precio:{$type:1}}, {_id:0, cantidad:0})
+
+  db.libros.insertMany([
  {
     _id: 12,
     titulo: 'IA',
@@ -400,211 +345,193 @@ db.libros.insertMany([
 	cantidad: 30
   }]
   )
-```
 
-```json
-db.libros.find({_id:13}
+1. Seleccionar los documentos donde la ediatorial sea de tipo entero
+  db.libros.find({editorial:{$type:16}})
+  db.libros.find({editorial:{$type:'int'}})
 
-db.libros.insertOne({editorial:{$type:16}})
-```
+2. Seleccionar todos los documentos  donde la editorial sea string
+db.libros.find({editorial:{$type:'string'}})
+db.libros.find({editorial:{$type:2}})
 
-1. Seleccionar todos los documentos don
+## Practica de Consultas
+1. Instalar las tools de mongodb
+[DatabaseTools](https://www.mongodb.com/try/download/database-tools)
 
+2. Cargar el json empleados (Debemos estar ubicados en la carpeta donde se encuentra el JSON empleados)
 
-## Practica de consultas
-1. Instalar las tools de monofdb
-
-
-2. Cargar json
---En local:
-  mongoimport --db curso --collection empleados --file empleados
+- En local:
+  comando:
+    mongoimport --db curso --collection empleados --file empleados.json
+- Docker:
+    mongoimport --db curso --collection empleados --file empleados.json --port 27018
 
 # Modificando Documentos
-## Comandos importabtes
-1. updateOne -> Modififcar un solo documento
-2. updateMany -> Modificar multiples documentos 
+## Comandos importantes
+
+1. updateOne -> Modificar un solo documento
+2. updateMany -> Modificar multiples documentos
 3. replaceOne -> Sustituir el contenido completo de un documento
 
-Tiene el segundo formato:
+Tiene el siguiente formato:
 
-```json
+``` json
 db.collection.updateOne(
-  {filtro},{operador: }
+  {filtro},
+  {operador: }
 )
 ```
 
+[Operadores Update](https://www.mongodb.com/docs/manual/reference/operator/update/)
+
 ### Operador set
+
 1. Modificar un documento
-```json
-db.libros.updateOne({titulo:'Python para torpes'},{$set:{titulo:'Java para todos'}})
+
+``` json
+db.libros.updateOne({titulo:'Python para todos'},{$set:{titulo:'Java para Todos'}})
 ```
 
-2. Actualizar el precio a 100 y la cantidad a 50 para el _id: 10
-```json
-db.libros.updateOne({_id:10},{$set:{precio:100, cantidad: 50}})
+db.libros.updateOne({_id:2},{$set:{precio:56, existencia:10}})
+
+
+2. Actualizar el precio a 100 y la cantidad a 50 para el _id:10
+
+db.libros.updateOne({_id:10},{$set:{precio:100, cantidad:50}})
+
+#### Modificar Multiples Documentos
+
+-- Modificar todos los documentos donde el precio sea mayor a 100 a un precio de 150
+
+``` json
+db.libros.updateMany(
+  {precio:{$gt:100}},
+  {$set:{precio:150}}
+)
 ```
-
-### Modificar Multiples Documentos
-
---Modificar todos los documentos donde el precio sea mayor a 100 a un precio de 150
-```json
-db.libros.updateMany({precio:{$gt:100}},{$set:{precio:150}})
-```
-
 2. Operador $inc y $mul
--Actualizar con multiplicaciones de 2 todos los documentos mayores a 20
-```json
-db.libros.updateMany({cantidad:{$gt:20},{$mul:{cantidad:2}}})
-```
 
---Actualizar todos los documentos donde el precio sea mayor a 20 y
-se multiplique por 2 la cantidad y el precio
+- Actualizar con un incremento de cinco todos los documentos
+db.libros.updateMany(
+  {},
+  {$inc:{precio:5}}
+)
 
-```json
+- Actualizar con multiplicación de 2 todos los documentos que la cantidad sean mayores a 20
+
+db.libros.updateMany({cantidad:{$gt:20}},{$mul:{cantidad:2}})
+
+- Actualizar todos los documentos donde el precio sea mayor a 20 y se multiplique por 2 la cantidad y el precio
+
 db.libros.updateMany({precio:{$gt:20}},{$mul:{cantidad:2, precio:2}})
-```
 
-3. Remplazar Documentos (replaceOne)
-```json
-db.libros.updateOne({_id:2},{$set:{precio:56,existencia:10}})
+3. Reemplazar Documentos (replaceOne)
 
-db.libros.replaceOne({_id:2}, {titulo:'De la Tierra a la Luna', autor: 'Julio Verne', precio: 20})
-```
+´´´ json
+db.libros.replaceOne({_id:2}, {titulo:'De la Tierra a la Luna', autor:'Julio Verne', precio:500})
+´´´
 
-## Borrar Documentos
+# Borrar Documentos
 
-1. deleteOne -> Elimina un solo documento 
-2. deleteMany -> Elimina varios documentos
+1. deleteOne -> Elimina un solo documento
+2. deleteMany -> Elimina Multiples documentos
 
-1. Eliminar el documento con ID 2
-```json
+1. Eliminar el documento con id 2
+
 db.libros.deleteOne({_id:2})
-```
 
-2. Eliminar los documentos donde la cantidad sea mayor o igual a 100
-```json
+2. Eliminar los documentos donde la cantidad sea mayor o igual a 150
+
 db.libros.deleteMany({cantidad:{$gte:100}})
-```
 
-# Expresiones Regulares
+# Expresiones Regulares 
 
-1. Buscar los libros que contenga el titulo la letra t 
-```json
+1. Buscar los libros que contenga el titulo la letra t
+
 db.libros.find({titulo:/t/})
-```
 
-2. Buscar los libros que en el titulo contenganla palabra json
-```json
+2. Buscar los libros que en el titulo contengan la palabra json
 db.libros.find({titulo:/JSON/})
-```
 
-3. Buscar todos los documentos que en el titulo terminen en tos
-```json
+3. Buscar todos los documentos que en titulo terminen en tos
 db.libros.find({titulo:/tos$/})
-```
 
-4. Todos los documentosque en el titulo comiencen con J 
-```json
+4. Todos los documentos que en el titulo comiencen con J
 db.libros.find({titulo:/^J/})
-```
 
 # Operador $regex
-[Operador regex](Enlace Aqui...)
+[Operador Regex](https://www.mongodb.com/docs/manual/reference/operator/query/regex/)
 
--- Seleccionar los libros que contengan la palabra 'para' en titulo
-```json
-db.libros.find({titulo:{$regex: 'para'}})
+- Seleccionar los libros que contengan la palabra para en titulo
+db.libros.find({titulo: {$regex: 'para'}})
 
-db.libros.find({titulo:{$regex: 'JSON'}})
+db.libros.find({titulo:{$regex:'JSON'}})
 
 db.libros.find({titulo:{$regex:/JSON/}})
-```
--Distingue entre mayusculas y minusculas
 
-```json
-db.libros.find({titulo:{$regex:/json/}}) 
+- Distinguir entre mayusculas y minusculas
 
-No disitingue entre mayusculas y minusculas
-
-db.libros.find({titulo:{$regex:/json/, $options: "j"}}) ->| Distingue entre mayusculas y minusculas
+db.libros.find({titulo:{$regex:/json/}}) -> No distingue entre mayusculas y minusculas
 
 db.libros.find({titulo:{$regex:/json/i}})
 
-```
+db.getCollection('libros').find({
+  titulo: {
+    $regex: RegExp('json'),
+    $options: 'i'
+  }
+});
 
 -- Seleccionar todos los libros que comiencen con j o J
-```json
-db.libros.find({titulo:{$regex:/j/i}})
-```
 
--- Seleccionar todos los libros que terminen en 'es'
-```json
-db.libros.find({titulo:{$regex:/es$/i}})
+db.getCollection('libros').find({
+  titulo: { $regex: RegExp('^j', 'i') }
+});
 
-db.libros.find({titulo:{$regex:'es$',options:'i'}})
-```
+--seleccionar todos los libros que terminen es
+
+db.libros.find({titulo:{$regex: /es$/i}})
+
+db.libros.find({titulo:{$regex: 'es$', $options:'i'}})
 
 # Metodo sort (Ordenar Documentos)
 
-1. Ordenar los libros de manera ascendente por el precio
-```json
+1. Ordenar los libros de manera accendente por el precio
+
 db.libros.find({},{titulo:1, precio:1, _id:0}).sort({precio:1})
-```
 
 2. Ordenar los libros de manera descendente por el precio
-```json
 db.libros.find({},{titulo:1, precio:1, _id:0}).sort({precio:-1})
-```
 
-3. Ordenar los libros de manera ascendente por la editorial y de manera descendente por el precio,
-mostrando el titulo, el precio y la editorial
-```json
-db.libros.find({},{titulo:1, precio:1, editorial:1, _id:0}).sort({editorial:1,precio:-1})
-```
+3. Ordenar los libros de manera asencente por la editorial y de manera
+descendente por el precio, mostrando el titulo, el precio y la editorial
 
-# Otros Metodos skip, limit, size
-```json
-db.libros.find({}, {titulo:1, precio:1, _id:0, editorial:1}).size()
+db.libros.find({}, {titulo:1, precio:1, editorial:1, _id:0}).sort({editorial:1, precio:-1})
+
+# Otros Métodos skip, limit, size
 
 db.libros.find({}).size()
-
-db.libros.find({titulo:{$regex:/java/i}}).size()
-```
+db.libros.find({titulo:{$regex:/Java/i}}).size()
 
 -- Buscar todos los libros pero mostrando los dos primeros
-```json
 db.libros.find({},{titulo:1, editorial:1, precio:1, _id:0}).limit(2)
-```
 
 -- Mostrar los 3 ultimos libros
-```json
-db.libros.find({},{titulo:1, precio:1, editorial:1, _id:0}).sort({precio:-1}).limit(3)
-```
+db.libros.find({},{titulo:1,editorial:1, precio:1, _id:0}).sort({precio:-1}).limit(3)
 
---
+db.getCollection('libros')
+  .find({}, { titulo: 1, editorial: 1, _id: 0 })
+  .sort({ titulo: 1, precio: -1 })
+  .limit(4);
 
-```json
-db.libros.find({},{titulo:1, precio:1, editorial:1}).skip(2)
-```
+  # Borrar Colecciones y base de Datos
 
--- Seleccionar todos los libros ordenados por titulo de forma descendente saltando los 
-2 primeros documentos y que muestre el tamaño
+  use db5
+  db.createCollection('ejemplo')
+  show collections
 
-```json 
-db.libros.find({}).sort({titulo:-1}).skip(2).size()
-```
+  db.ejemplo.insertOne({nombre: 'Chapuin'})
+  db.ejemplo.drop()
+  db.dropDatabase()
 
-# Borrar colecciones y bases de datos
-db.createCollection('ejemplo')
-
-show collections
-
-db.ejemplo.insertOne({nombre:''Chapuin})
-
-db.ejemplo.drop()
-
-db.dropDatabase()
-
-```json
-
-```
+                      
